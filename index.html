@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TaskMaster Pro Dashboard</title>
+    <!-- Thư viện bên ngoài -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Liên kết tới tệp CSS của bạn -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="bg-gray-100">
+    <div class="container mx-auto max-w-4xl p-4 sm:p-6">
+        <!-- Header -->
+        <div class="text-center mb-8">
+            <h1 class="text-4xl md:text-5xl font-bold text-gray-800">TaskMaster Dashboard</h1>
+            <p class="text-gray-500 mt-2">Your Task Overview</p>
+        </div>
+
+        <!-- KPI Cards -->
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-8">
+            <div class="bg-white p-5 rounded-xl shadow-md flex items-center gap-4">
+                <div class="bg-blue-100 p-3 rounded-full"><i class="fas fa-list-check text-blue-500 fa-lg"></i></div>
+                <div>
+                    <p class="text-gray-500 text-sm">Total Tasks</p>
+                    <p id="kpi-total" class="text-2xl font-bold text-gray-800">0</p>
+                </div>
+            </div>
+            <div class="bg-white p-5 rounded-xl shadow-md flex items-center gap-4">
+                <div class="bg-green-100 p-3 rounded-full"><i class="fas fa-check-double text-green-500 fa-lg"></i></div>
+                <div>
+                    <p class="text-gray-500 text-sm">Completed</p>
+                    <p id="kpi-completed" class="text-2xl font-bold text-gray-800">0</p>
+                </div>
+            </div>
+            <div class="bg-white p-5 rounded-xl shadow-md flex items-center gap-4">
+                <div class="bg-red-100 p-3 rounded-full"><i class="fas fa-exclamation-triangle text-red-500 fa-lg"></i></div>
+                <div>
+                    <p class="text-gray-500 text-sm">Overdue</p>
+                    <p id="kpi-overdue" class="text-2xl font-bold text-gray-800">0</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Charts Section -->
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8">
+            <div class="bg-white p-5 rounded-xl shadow-lg">
+                <h3 class="text-lg font-semibold text-gray-700 mb-4 text-center">Tasks by Priority</h3>
+                <div class="chart-container">
+                    <canvas id="priority-chart"></canvas>
+                </div>
+            </div>
+            <div class="bg-white p-5 rounded-xl shadow-lg">
+                <h3 class="text-lg font-semibold text-gray-700 mb-4 text-center">Tasks by Status</h3>
+                <div class="chart-container">
+                    <canvas id="status-chart"></canvas>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Task Management Section -->
+        <div class="bg-white p-5 rounded-xl shadow-lg">
+             <!-- Input Form -->
+            <div class="mb-6">
+                <form id="task-form" class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div class="md:col-span-2">
+                        <input type="text" id="task-input" placeholder="What's the task name?" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500" required>
+                    </div>
+                    <div>
+                        <label for="task-priority" class="block text-sm font-medium text-gray-700 mb-1">Priority</label>
+                        <select id="task-priority" class="w-full p-3 border border-gray-300 rounded-lg">
+                            <option value="medium">Medium</option>
+                            <option value="high">High</option>
+                            <option value="low">Low</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label for="task-due-date" class="block text-sm font-medium text-gray-700 mb-1">Due Date</label>
+                        <input type="date" id="task-due-date" class="w-full p-3 border border-gray-300 rounded-lg">
+                    </div>
+                    <div class="md:col-span-2">
+                        <button type="submit" class="w-full bg-blue-600 text-white p-3 rounded-lg font-semibold hover:bg-blue-700 transition shadow-md active:scale-95"><i class="fas fa-plus mr-2"></i>Add Task</button>
+                    </div>
+                </form>
+            </div>
+            <!-- Actions and List -->
+            <div class="flex flex-col sm:flex-row justify-between items-center gap-4 mb-4">
+                <div class="flex gap-2">
+                     <button id="sort-by-priority" class="bg-gray-100 text-gray-700 px-3 py-2 rounded-lg text-sm font-medium hover:bg-gray-200"><i class="fas fa-exclamation-circle mr-2"></i>Priority</button>
+                     <button id="sort-by-date" class="bg-gray-100 text-gray-700 px-3 py-2 rounded-lg text-sm font-medium hover:bg-gray-200"><i class="fas fa-calendar-alt mr-2"></i>Date</button>
+                </div>
+                <button id="clear-completed" class="bg-red-100 text-red-700 px-3 py-2 rounded-lg text-sm font-medium hover:bg-red-200"><i class="fas fa-broom mr-2"></i>Clear Completed</button>
+            </div>
+             <h3 class="text-xl font-semibold text-gray-700 border-b pb-2 mb-4">Task List</h3>
+            <ul id="task-list" class="space-y-3"></ul>
+        </div>
+    </div>
+    <!-- Liên kết tới tệp JavaScript của bạn, `defer` để đảm bảo HTML được tải xong trước khi chạy script -->
+    <script src="script.js" defer></script>
+</body>
+</html>
