@@ -1,0 +1,39 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+body { 
+    font-family: 'Inter', sans-serif; 
+}
+
+.completed > div > .task-text { 
+    text-decoration: line-through; 
+    color: #9ca3af; 
+}
+
+.completed .complete-btn { 
+    color: #16a34a; 
+}
+
+.task-item { 
+    transition: all 0.3s ease; 
+    border-left: 4px solid transparent; 
+}
+
+.task-item.priority-high { border-left-color: #ef4444; }
+.task-item.priority-medium { border-left-color: #f59e0b; }
+.task-item.priority-low { border-left-color: #22c55e; }
+.task-item.overdue { background-color: #fee2e2; }
+.task-item.due-soon { background-color: #fef3c7; }
+
+.chart-container {
+    position: relative;
+    width: 100%;
+    max-width: 500px;
+    height: 320px;
+    margin-left: auto;
+    margin-right: auto;
+}
+@media (min-width: 768px) {
+    .chart-container {
+        height: 350px;
+    }
+}
